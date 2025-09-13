@@ -1,0 +1,32 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+
+  <div class="c-content c-content--type-{{ .Type }} c-content--kind-{{ .Kind }} e-content">
+    {{ .Content }}
+  </div>
+
+  {{ $pages := where site.RegularPages "Type" .Type }}
+  
+  <div class="">
+
+    <ul class="c-photo-grid">
+    {{ range $pages }}
+      {{ $passed := false }}
+      {{ if isset .Params "passed"}}
+        {{ $passed = true }}
+      {{end }}
+      <li class="c-photo-grid__item"><a href="{{ .RelPermalink }}" class="c-photo-grid__link">
+        <p class="c-photo-grid__title">{{ .Title }}</p>
+        {{ with .Resources.GetMatch "files/cover*" }}
+        {{ with .Resize "300x" }}
+        <img src="{{ .RelPermalink }}" class="c-photo-grid__image{{if $passed}} c-photo-grid__image--passed{{ end }}" width="{{ .Width }}" height="{{ .Height }}" alt="">
+        {{ end }}
+        {{ end }}
+      </a></li>
+    {{ end }}
+    </ul>
+    {{ partial "pagination.html" . }}
+  </div>
+
+{{ end }}

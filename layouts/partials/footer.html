@@ -1,0 +1,54 @@
+<footer class="c-footer">
+  <div class="c-footer__inner">
+
+    <h1 class="c-footer__title">A little more...</h1>
+    <div class="c-footer__items">
+
+      <div class="c-footer__item">
+        <h2 class="c-footer__subtitle">Colophon <span class="c-icon">{{- partial "icon" "anchor" }}</span></h2>
+        <nav class="c-footer-nav">
+          <ul class="c-footer-nav__inner">
+            {{ range .Site.Menus.footer.ByWeight }}
+            <li class="c-footer-nav__item"><a href="{{ .URL }}" class="c-footer-nav__link">{{ .Name }}</a></li>
+            {{ end }}
+          </ul>
+        </nav>
+      </div>
+
+      <div class="c-footer__item">
+        <h2 class="c-footer__subtitle">RSS Feeds <span class="c-icon">{{- partial "icon" "rss" }}</span></h2>
+        <nav class="c-footer-nav">
+          <ul class="c-footer-nav__inner">
+            <li class="c-footer-nav__item"><a class="c-footer-nav__link"
+                href="{{ .Site.BaseURL }}/index.xml">Everything</a></li>
+            {{ range .Site.Sections }}
+            <li class="c-footer-nav__item"><a class="c-footer-nav__link"
+                href="{{ .Site.BaseURL }}{{ .Section }}/index.xml">{{ .Section | strings.FirstUpper}}</a></li>
+            {{ end }}
+          </ul>
+        </nav>
+      </div>
+
+      <div class="c-footer__item">
+        <h2 class="c-footer__subtitle">Taxonomies <span class="c-icon">{{- partial "icon" "tag" }}</span></h2>
+        <nav class="c-footer-nav">
+          <ul class="c-footer-nav__inner">
+            <li class="c-footer-nav__item"><a href="/tags/" class="c-footer-nav__link">Tags</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="c-footer__item">
+        <h2 class="c-footer__subtitle">Debug <span class="c-icon">{{- partial "icon" "bug" }}</span></h2>
+        <nav class="c-footer-nav">
+          <ul class="c-footer-nav__inner">
+            <li class="c-footer-nav__item">Kind: {{ .Kind }}</li>
+            <li class="c-footer-nav__item">Type: {{ .Type }}</li>
+            {{ if .CodeOwners }}<li class="c-footer-nav__item">Codeowners: {{ range .CodeOwners }}{{ . }}{{ end }}</li>{{ end }}
+            <li class="c-footer-nav__item">Generator: Hugo {{ hugo.Version }}</li>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+</footer>

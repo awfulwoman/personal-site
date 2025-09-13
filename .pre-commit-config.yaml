@@ -1,0 +1,17 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: end-of-file-fixer
+        files:  ^content/
+        types: [markdown]
+      - id: trailing-whitespace
+        files:  ^content/
+        types: [markdown]
+  - repo: local
+    hooks:
+      - id: remove-exif-data
+        name: Remove location data
+        entry: exif.sh
+        language: script
+        files: ^content/.*\.(jpg|jpeg|png)$

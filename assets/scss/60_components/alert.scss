@@ -1,0 +1,25 @@
+
+.c-alert {
+  border-left-width: 8px;
+  border-left-style: solid;
+  border-left-color: pink;
+  padding: 1px 15px;
+  margin: 0 0 1rem 0;
+  display: block;
+}
+
+.c-alert--info {
+  border-left-color: rgba(var(--message-info-color), 1);
+  background-color: rgba(var(--message-info-color), 0.25);
+}
+
+.c-alert--warning {
+  border-left-color: var(--message-warning-color);
+  background-color: rgba(var(--message-warning-color), .25);
+}
+
+.c-alert--danger {
+  border-left-color: rgba(var(--message-danger-color), 1);
+  background-color: rgba(var(--message-danger-color), 0.25);
+}
+

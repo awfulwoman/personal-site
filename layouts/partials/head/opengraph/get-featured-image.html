@@ -1,0 +1,78 @@
+{{ $images := $.Resources.ByType "image" }}
+{{ $featured := $images.GetMatch "*feature*" }}
+{{ if not $featured }}{{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" }}{{ end }}
+{{ if not $featured }}
+
+  {{/* ----------- GET BASE CARD ----------- */}}
+
+  {{ $featured = resources.Get "/opengraph/card-base.png" }}
+
+
+  {{/* ----------- BUILD CARD TITLE ----------- */}}
+
+  {{ $titleSize := 80 }}
+  {{ $titleText := $.Title }}
+  {{ if gt (len $titleText) 70 }}
+    {{ $titleSize = 40 }}
+  {{ end }}
+
+  {{ $titleOptions := dict 
+      "color" "#000"
+      "size" $titleSize
+      "lineSpacing" 10
+      "x" 65 "y" 80
+      "font" (resources.Get "/fonts/Roboto-Bold.ttf")
+  }}
+
+  {{ $featured = $featured | images.Filter (images.Text $titleText $titleOptions) }}
+
+  {{/* ----------- BUILD CARD DATE ----------- */}}
+
+  {{/*  TODO: ADD CARD DATE  */}}
+
+  {{/* ----------- BUILD CARD ICON ----------- */}}
+      
+  {{ $iconImage := "" }}
+  {{ $iconType := ""}}
+
+  {{ if ne $.Type "page" }}
+    {{ $iconType = $.Type }}
+  {{ end }}
+
+  {{ if $iconType }}
+    {{ $path := printf "/images/types/%s.png" $iconType }}
+    {{ with resources.Get $path }}
+      {{ $iconImage = . }}
+      {{ $iconWidth := 250}}
+      {{ $iconHeight := 250}}
+
+      {{ $iconMarginX := 30 }}
+      {{ $iconMarginY := 100 }}
+
+      {{ $iconResizeCommand := (printf "resize %sx" (string $iconWidth) ) }}
+
+      {{ $iconImage = $iconImage | images.Filter (images.Process $iconResizeCommand )}}
+
+      {{ $x := sub $featured.Width $iconWidth }}
+      {{ $x = sub $x $iconMarginX }}
+
+      {{ $y := sub $featured.Height $iconHeight}}
+      {{ $y = sub $y $iconMarginY }}
+
+      {{ $featured = $featured | images.Filter (images.Overlay $iconImage $x $y) }}  
+
+    {{ else }}
+      {{ errorf "Unable to get resource %q" $path }}
+    {{ end }}
+
+
+    {{/* ----------- BUILD CARD BIO PIC ----------- */}}
+
+    {{/*  TODO: ADD BIO PIC   */}}
+
+  {{ end }}
+
+
+{{ end }}
+
+{{ return $featured }}

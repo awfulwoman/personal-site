@@ -1,0 +1,12 @@
+github.com/hugomods/bootstrap v0.23.0 h1:/Mj6VCk+xUNan72m4ulupu+oRug7IuvpBO1jp+MhhFw=
+github.com/hugomods/bootstrap v0.23.0/go.mod h1:eL5Y6abDndTt/LZu1VtgprvkdZgsV7/d3jpSoCcDkKQ=
+github.com/hugomods/icons v0.6.6 h1:gGlafcBDRP7sSID+tgLcWdog+s/QBj8DIfU+h9tZj1U=
+github.com/hugomods/icons v0.6.6/go.mod h1:cIkSvK6W0q6N4U6n9KGz+QfRWQXAW0INd+1P31gPNGg=
+github.com/hugomods/icons/vendors/bootstrap v0.5.9 h1:IlKsW1iybTNZLYnMipyc2d9w51rUtu89lPMkocGaP6c=
+github.com/hugomods/icons/vendors/bootstrap v0.5.9/go.mod h1:DuB5N1o3GCUyvYFnEeBvJRBrCHqbMWEbjoEWVLULggw=
+github.com/hugomods/icons/vendors/mdi v0.3.8 h1:Tw4DooGpAHK2Lk+r6UnuWC/NesGPdR0x0U1Ullu2Og8=
+github.com/hugomods/icons/vendors/mdi v0.3.8/go.mod h1:UzARXfBJorEKYC9o+Ap6rsKSiI+UFkNWJjKn+DR2tpA=
+github.com/hugomods/images v0.11.2 h1:d7u3c/ePboeOGx8OI5eUnilpA79YvD7KJjUgqVMR83Y=
+github.com/hugomods/images v0.11.2/go.mod h1:U6Gwj16LKvk66rOMyGFrnF6f0aV8lT89lqOsckOAjYY=
+github.com/hugomods/katex v0.3.5 h1:G/NZcbyNEiSYG5A6yIBocIVXFnss/ZKvhephh7ZOPTQ=
+github.com/hugomods/katex v0.3.5/go.mod h1:i+fKI52f3QbiuK0ug5yRCB9ZJ/qUFERTk8UGuSZMQNQ=

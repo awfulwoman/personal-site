@@ -1,0 +1,29 @@
+.c-photo-grid {
+  list-style-type: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.c-photo-grid__item {
+
+}
+
+.c-photo-grid__link {
+  display: block;
+  padding: 5px;
+  text-decoration: none;
+}
+
+.c-photo-grid__image {
+
+}
+
+.c-photo-grid__image--passed {
+  filter: saturate(0);
+}
+
+.c-photo-grid__title {
+  font-weight: bold;
+  margin: 0;
+}

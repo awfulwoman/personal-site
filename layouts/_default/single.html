@@ -1,0 +1,23 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+  {{$section_heading := .Site.GetPage "section" .Section }}
+
+  <div class="c-content c-content--type-{{ .Type }} c-content--kind-{{ .Kind }} e-content">
+    {{ if .Draft }}<pre>+++DRAFT DRAFT DRAFT+++</pre>{{ end }}
+    {{ .Content }}
+    
+    {{ if .Params.bookmark_of }}
+    <p><a href="{{ .Params.bookmark_of }}" class="c-button">Original link{{ if .Params.basedomain }} on {{ .Params.basedomain }}{{ end }}</a><span class="u-remove"> and </span><a href="https://webcf.waybackmachine.org/{{ .Params.bookmark_of }}" class="c-button">Wayback Machine link</a></p>
+    {{ end }}
+
+    {{ if .Params.like_of }}
+    <p><a href="{{ .Params.like_of }}" class="c-button">Original link</a><span class="u-remove"> and </span><a href="https://webcf.waybackmachine.org/{{ .Params.like_of }}" class="c-button">Wayback Machine link</a></p>
+    {{ end }}
+  </div>
+
+  <div class="c-supporting">
+    {{ partial "taxonomies.html" . }}
+  </div>
+
+{{ end }}

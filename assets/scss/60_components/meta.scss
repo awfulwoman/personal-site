@@ -1,0 +1,29 @@
+.c-meta {
+
+}
+
+.c-meta__inner {
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+}
+
+.c-meta__item {
+    margin-right: 1rem;
+    border-right: 1px solid white;
+    padding-right: 1rem;
+}
+
+.c-meta__item:last-of-type {
+    border-right: none;
+}
+
+.c-meta__link:link,.c-meta__link:visited {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.c-meta__link:hover {
+    text-decoration: underline;
+    color: var(--link-color--hover);
+}

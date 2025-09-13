@@ -1,0 +1,65 @@
+name: Build site and push to hosting provider
+on: [push]
+
+jobs:
+  build-site:
+    name: Build site with Hugo
+    runs-on: ubuntu-latest
+    steps:
+      - name: Restore working dir
+        uses: actions/cache/restore@v4
+        id: cache-checkout-restore
+        with:
+          path: ${{ github.workspace }}
+          key: ${{ runner.os }}-checkout
+
+      - name: Checkout latest from repo
+        uses: actions/checkout@v4
+        with:
+          github-server-url: 'https://gitea.${{secrets.INFRA_DOMAIN}}'
+          repository: awfulwoman/personal-site
+          ref: main
+          fetch-depth: 0
+          clean: false
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '^1.24.2'
+          # check-latest: true
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.149.1'
+          extended: true
+
+      - name: Build site with Hugo
+        run: hugo --destination ${{ github.workspace }}/_site
+
+      # - name: ls _site
+      #   run: ls -alh ${{ github.workspace }}/_site
+
+      - name: Rsync site files to host
+        uses: up9cloud/action-rsync@master
+        env:
+          HOST: awfulwoman.com
+          KEY: ${{secrets.DEPLOYMENT_KEY}}
+          USER: ${{secrets.DEPLOYMENT_USER}}
+          VERBOSE: true
+          TARGET: /fastpool/sites/awfulwoman
+          SOURCE: ./_site/
+          RUN_SCRIPT_ON: target
+          ARGS: -avz --partial --delete --chown=nginx:nginx --itemize-changes --exclude=/.git/ --exclude=/.github/ --exclude=/.gitea/
+          PRE_SCRIPT: "echo START AT: && date -u"
+          POST_SCRIPT: "echo DONE AT: && date -u"
+          
+      - name: Cache checkout files
+        uses: actions/cache/save@v4
+        id: cache-checkout-save
+        with:
+          path: ${{ github.workspace }}
+          key: ${{ runner.os }}-checkout
+  # job2:
+  #   runs-on: ubuntu-latest
+  #   needs: build-site

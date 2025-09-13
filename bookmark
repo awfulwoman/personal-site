@@ -1,0 +1,57 @@
+#! /bin/bash
+CURRENT_YEAR=$(date +%Y)
+CURRENT_MONTH=$(date +%m)
+CURRENT_DAY=$(date +%d)
+CURRENT_TIME=$(date +%H%M)
+CURRENT_ISO8601=$(date +"%Y-%m-%dT%H:%M:%S%z")
+BOOKMARK_DIR="./content/bookmarks/$CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DAY"
+BOOKMARK_FILENAME="$CURRENT_TIME.md"
+BOOKMARK_FILEPATH="$BOOKMARK_DIR/$BOOKMARK_FILENAME"
+DESCRIPTION=""
+TITLE="No Bookmark Title"
+URL=""
+BASEDOMAIN=""
+
+if [ -z "$1" ]; then
+    echo "Bookmark URL is needed"
+fi
+
+URL=$1
+
+# LOCATION CHECK
+# Check to see if in root of repo
+# If not:
+# echo "Needs to be run in the root of the project repo."
+
+# MARKDOWN
+echo "Creating $BOOKMARK_FILEPATH"
+mkdir -p $BOOKMARK_DIR
+touch $BOOKMARK_FILEPATH
+
+TITLE=`curl -s $URL | pup 'title:first-of-type text{}'`
+BASEDOMAIN=`echo $URL | awk -F[/:] '{print $4}'`
+
+cat << EOF > $BOOKMARK_FILEPATH
+---
+title: "$TITLE"
+date: "$CURRENT_ISO8601"
+bookmark_of: $URL
+basedomain: $BASEDOMAIN
+---
+
+$DESCRIPTION
+
+EOF
+
+
+# IMAGES
+# Get URL from where it was pasted in.
+# test
+
+# Get the OG image for that URL, if it exists.
+
+# If OG image does not exist, take a screenshot of the site, and save it to disk as original.*
+
+# 
+
+code $BOOKMARK_FILEPATH

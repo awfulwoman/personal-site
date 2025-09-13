@@ -1,0 +1,25 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+
+  <div class="c-content c-content--type-{{ .Type }} c-content--kind-{{ .Kind }} e-content">
+    {{ .Content }}
+  </div>
+
+  <div class="c-supporting">
+    <h2>Latest {{ .Type | strings.Title }}</h2>
+    <ul class="c-list">
+      {{ $pages := where site.RegularPages "Type" .Type }}
+      {{ $paginator := .Paginate $pages }}
+      {{ range $paginator.Pages }}
+      <li class="c-list__item"><a class="c-list__link" href="{{ .RelPermalink }}">
+        <span class="c-list__icon c-icon">{{- partial "icon" .Type }}</span>
+        <span class="c-list__title">{{ if .Draft }}DRAFT - {{ end }}{{ if .Title}}{{ .LinkTitle | title }}{{ else }}Untitled {{ .Type | inflect.Singularize }} from {{ .Date | time.Format "January 2, 2006" }}{{ end }}</span>
+        <span class="c-list__meta">{{ .Date | time.Format "2006-01-02" }}</span>
+      </a></li>
+    {{ end }}
+    </ul>
+
+    {{ partial "pagination.html" . }}
+  </div>
+{{ end }}
