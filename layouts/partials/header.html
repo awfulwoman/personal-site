@@ -1,0 +1,29 @@
+{{ partial "menu/main.html" (dict "menuID" "main" "page" .) }}
+
+<header class="c-header">
+
+  <div class="c-headline">
+      <h1 class="p-name c-headline__title">{{ if .Title }}{{ .Title | title }}{{ else }}{{ .Type | title }}{{ end }}</h1>
+      {{ with .Params.subtitle }}
+        <span class="c-headline__subtitle">{{ . }}</span>
+      {{ end }}
+  </div>
+
+  <div class="c-meta {{ if or (in .Type .Kind) (in .Kind "section") (in .Kind "home") (in .Kind "taxonomy") (in .Kind "term") (in .Type "guineapigs") -}} u-remove {{ end }}">
+    <ul class="c-meta__inner">
+      <li class="c-meta__item">
+          <span class="c-icon">{{- partial "icon" .Type }}</span> <a href="/{{ .Type }}/" class="c-meta__link">{{ .Type | inflect.Singularize | title}}</a>
+      </li>
+      <li class="c-meta__item">
+        <span class="c-icon">{{- partial "icon" "author" -}}</span><a rel="author" class="p-author h-card c-meta__link" href="/about/ ">Charlie O'Hara</a>
+      </li>
+      <li class="c-meta__item">
+        <span class="c-icon">{{- partial "icon" "date" -}}</span>
+        <time class="dt-published" datetime="{{ .Date }}">
+        {{ .Date | time.Format "January 2, 2006" }}
+        </time>
+      </li>
+    </ul>
+  </div>
+
+</header>

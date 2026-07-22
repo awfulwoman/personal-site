@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>{{ block "title" . }}{{ .Site.Title }}{{ end -}}</title>
+    {{ hugo.Generator }}
+    {{- partial "head/css.html" . -}} 
+    {{- partial "head/head-imgs-css.html" . -}} 
+    {{- partial "head/opengraph/opengraph.html" . -}}
+    {{- with resources.Get "fonts/RobotoMono-Bold.ttf" }}{{ .Publish }}{{ end -}}
+    <link rel="canonical" class="u-url" href="{{ .Permalink }}">
+    <link rel="me" href="https://indieweb.social/@awfulwoman">
+    <meta name="fediverse:creator" content="@awfulwoman@indieweb.social">
+    <link rel="alternate" class="u-syndication" type="application/rss+xml" title="{{ .Site.Title }}" href="{{ .Site.BaseURL }}index.xml">
+    {{- range .Site.Sections -}}
+	  <link rel="alternate" type="application/rss+xml" title="Just the {{ title .Section }}" href="{{ .Site.BaseURL }}{{ .Section }}/index.xml">
+    {{ end -}}
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+  </head>
+  <body>
+    <div class="h-entry l-page">
+      <div class="l-page-header">
+        {{ block "header" . }} 
+          {{ partial "header.html" . }} 
+          {{/*  {{ partial "breadcrumb.html" . }}  */}}
+        {{ end }}
+      </div>
+      <main class="l-page-main">
+        {{ block "main" . }}
+          {{ .Content }}
+        {{ end }}
+      </main>
+      <div class="l-page-footer">
+        <div class="l-page-footer__inner">
+          {{ block "footer" . }} 
+            {{ partial "footer.html" . }} 
+          {{ end }}
+        </div>
+      </div>
+    </div>
+
+    <!-- <h1>.Page</h1>  
+    <pre>{{  debug.Dump .Page }}</pre>   -->
+  </body>
+</html>
+
+

@@ -1,0 +1,19 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+
+<div class="c-content c-content--type-{{ .Type }} c-content--kind-{{ .Kind }} e-content">
+  {{ .Content }}
+</div>
+
+  <div class="c-supporting">
+    <ul class="c-list">
+    {{ range .Pages }}
+      <li class="c-list__item"><a class="c-list__link" href="{{ .RelPermalink }}">
+        <span class="c-list__icon c-icon">{{- partial "icon" "tag" }}</span>
+        <span class="c-list__title">{{ if .Title}}{{ .LinkTitle | title }}{{ else }}Untitled {{ .Type | inflect.Singularize }} from {{ .Date | time.Format "January 2, 2006" }}{{ end }}</span>
+      </a></li>
+    {{ end }}
+    </ul>
+  </div>
+{{ end }}

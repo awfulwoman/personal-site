@@ -1,0 +1,31 @@
+.c-card {
+  margin-bottom: 1rem;
+}
+
+.c-card__link {
+  display: block;
+  background-color: #ffffff;
+  margin-bottom: 0.5rem;
+  border: 1px solid var(--link-color);
+  padding: 0.5rem;
+  text-decoration: none;
+}
+.c-card__link:hover {
+  border: 1px solid var(--link-color--hover);
+  color: var(--link-color);
+}
+
+.c-card__type {
+  display: block;
+  float: right;
+}
+
+.c-card__title {
+  display: block;
+  font-weight: bold;
+}
+
+.c-card__date {
+  display: block;
+  font-size: var(--smaller-font-size);
+}

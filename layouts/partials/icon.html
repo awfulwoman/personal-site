@@ -1,0 +1,19 @@
+{{ $type := false }}
+{{ if eq . "bandnames" }}{{ $type = "volume-high" }}{{ end }}
+{{ if eq . "posts" }}{{ $type = "typewriter" }}{{ end }}
+{{ if eq . "notes" }}{{ $type = "file-document" }}{{ end }}
+{{ if eq . "bookmarks" }}{{ $type = "link-variant" }}{{ end }}
+{{ if eq . "checkins" }}{{ $type = "map-marker" }}{{ end }}
+{{ if eq . "likes" }}{{ $type = "thumb-up" }}{{ end }}
+{{ if eq . "quotes" }}{{ $type = "format-quote-open" }}{{ end }}
+{{ if eq . "author" }}{{ $type = "account" }}{{ end }}
+{{ if eq . "date" }}{{ $type = "calendar-blank" }}{{ end }}
+{{ if eq . "bug" }}{{ $type = "bug" }}{{ end }}
+{{ if eq . "anchor" }}{{ $type = "anchor" }}{{ end }}
+{{ if eq . "rss" }}{{ $type = "rss" }}{{ end }}
+{{ if eq . "tag" }}{{ $type = "pound" }}{{ end }}
+{{ if $type }}
+{{ $icon := dict
+  "vendor" "mdi"
+  "name" $type
+-}}{{ partial "icons/icon" $icon }}{{ end -}}
